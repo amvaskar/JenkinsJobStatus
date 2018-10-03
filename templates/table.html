@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name=" viewport" content="width = device- width intial-scale=1.0">
+	<title>Jenkins jobStatus</title>
+
+</head>
+<body style="background-color:#adebad;">
+<header>
+	<h3>Jenkins Build Job Status</h3>
+</header>
+<style>
+  header {
+  background-color: #666;
+  padding: 20px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+	}
+  html, body {
+    height: 100%;
+  }
+  #tableContainer-1 {
+    height: 50%;
+    width: 100%;
+    display: table;
+  }
+  #tableContainer-2 {
+    vertical-align: middle;
+    display: table-cell;
+    height: 100%;
+  }
+  #myTable {
+    margin: 0 auto;
+  }
+</style>
+
+<div id="tableContainer-1">
+  <div id="tableContainer-2">
+
+<table border="1" align="center" bgcolor="silver" >
+<tr>
+		<th width="200" height="40">Project Name </th>
+		<th>Jenkins Build Job Status</th>
+
+	</tr>
+
+{% for project_name in status %}
+
+  <td align="center"> {{ project_name }} </td>
+
+	<td>
+		<table border="1" bgcolor="grey">
+			<font color="white">
+			<tr>
+				<th width="300">Job Name</th>
+				<th width="70">Success</th>
+				<th width="70">Failure</th>
+				<th width="70">Abort</th>
+				<th width="70">Others</th>
+				<th width="70">History</th>
+			</tr>
+
+			{% for job in status[project_name] %}
+			<tr>
+
+				<td align="center">{{ job }}</td>
+				{% for status_number in status[project_name][job] %}
+				<td align="center">{{ status_number }}</td>
+			{% endfor %}
+			</tr>
+			{% endfor %}
+			</font>
+		</table>
+
+	</td>
+
+</tr>
+{% endfor %}
+</table>
+</div>
+</div>
+</body>
+</html>
